@@ -6,7 +6,7 @@ def main():
     client_name = 'publisher'
     client = mqtt.Client(client_name)
 
-    connection_params = {'host': 'localhost',
+    connection_params = {'host': '192.168.1.40',
                          'port': 1883,
                          'keepalive': 60,
                          'bind_address': ''}
