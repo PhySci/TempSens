@@ -1,5 +1,8 @@
 t = require "ds18b20"
 pin = 2 -- gpio0 = 3, gpio2 = 4
+app = require("application")
+config = require("config")
+setup = require("setup")
 
 local function show_sensor_info()
   if t.sens then
@@ -49,12 +52,12 @@ local function wifi_wait_ip()
 end
 
 do
-  wifi.setmode(wifi.STATION)
-  wifi.sta.config{ssid="MyNet", pwd="dfqafqdfqafq"}
-  wifi.sta.connect()
+  -- wifi.setmode(wifi.STATION)
+  -- wifi.sta.config{ssid="MyNet", pwd="dfqafqdfqafq"}
+  -- wifi.sta.connect()
 
-  tObj = tmr.create()
-  tObj:alarm(2000, tmr.ALARM_AUTO, wifi_wait_ip)
+  -- tObj = tmr.create()
+  -- tObj:alarm(2000, tmr.ALARM_AUTO, wifi_wait_ip)
   
   -- tmr.create():alarm(1000, tmr.ALARM_AUTO, wifi_wait_ip)
   -- tmr.alarm(0, 5000, tmr.ALARM_SINGLE, )
@@ -67,4 +70,5 @@ do
   -- show_sensor_info()
 
   -- tmr.create():alarm(2000, tmr.ALARM_AUTO, fourth_level)
+  setup.start()  
 end
