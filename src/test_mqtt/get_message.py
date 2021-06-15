@@ -18,10 +18,10 @@ def main():
 
     client.connect(**connection_params)
 
-    client.subscribe('main')
+    client.subscribe('nodemcu/ping')
     client.loop_start()
     while True:
-        time.sleep(0.1)
+        time.sleep(0.01)
 
     client.loop_stop()
     client.disconnect()
@@ -36,10 +36,10 @@ def on_connect(client, userdata, flags, rc):
         print("Bad connection Returned code=",rc)
 
 def on_message(client, userdata, message: mqtt.client.MQTTMessage):
-    print('Mesage received', str(message.payload.decode("utf-8")))
-    print('Message topic', message.topic)
-    print('Message qos=', message.qos)
-    print('Message retain flag=', message.retain)
+    print('Mesage received', str(message.payload))
+    # print('Message topic', message.topic)
+    # print('Message qos=', message.qos)
+    # print('Message retain flag=', message.retain)
 
 
 if __name__ == '__main__':

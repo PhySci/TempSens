@@ -1,9 +1,9 @@
 local module = {}
 
 module.SSID = {}
-module.SSID['TestNet'] = 'password'
+module.SSID['MyNet'] = 'dfqafqdfqafq'
 
-module.HOST = "IP"
+module.HOST = "192.168.1.40"
 module.PORT = 1883
 module.ID = node.chipid()
 
