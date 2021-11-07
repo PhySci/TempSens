@@ -1,8 +1,8 @@
 ds18 = require("ds18b20")
-pin = 2 -- gpio0 = 3, gpio2 = 4
+pin = 3 -- gpio0 = 3, gpio2 = 4
 app = require("application")
 config = require("config")
-setup = require("setup")
+set = require("setup")
 
 
 local function readout(temps)
@@ -25,13 +25,15 @@ local function application()
   tmr.create():alarm(1000, tmr.ALARM_AUTO, read_temp)
 end
 
+
+
 do  
   print("Im here")
-  application()
-  -- ds18:enable_debug()
-  --file.remove("ds18b20_save.lc") -- remove saved addresses
-  --setup.connect_clb = app.start
-  --app.connect_clb = application
-  --setup.start()
-end
+  -- application()
+  --ds18:enable_debug()
+  file.remove("ds18b20_save.lc") -- remove saved addresses
+  set.connect_clb = app.start
+  app.connect_clb = application
+  set.start()
 
+end

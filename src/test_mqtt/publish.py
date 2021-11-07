@@ -2,9 +2,10 @@ import paho.mqtt.client as mqtt
 import random
 import time
 
+
 def main():
-    client_name = 'publisher'
-    client = mqtt.Client(client_name)
+    client_name = 'PyCharm'
+    client = mqtt.Client(client_id=client_name)
 
     connection_params = {'host': '192.168.1.40',
                          'port': 1883,
@@ -14,9 +15,12 @@ def main():
     client.loop_start()
 
     for i in range(10):
-        v = client.publish('main', payload='ON_'+str(i), qos=1)
-        print(v)
-        time.sleep(1)
+        (rc, mid) = client.publish('nodemcu/ping', payload='ON_'+str(i), qos=1)
+        if rc != 0:
+            print('Error')
+        else:
+            print('Message id ', mid)
+        time.sleep(5)
     client.loop_stop()
     client.disconnect()
 

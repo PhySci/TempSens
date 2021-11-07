@@ -11,8 +11,8 @@ local type, tostring, pcall, ipairs =
       type, tostring, pcall, ipairs
 -- Local functions
 local ow_setup, ow_search, ow_select, ow_read, ow_read_bytes, ow_write, ow_crc8,
-        ow_reset, ow_reset_search, ow_skip, ow_depower =
-      ow.setup, ow.search, ow.select, ow.read, ow.read_bytes, ow.write, ow.crc8,
+        ow_reset, ow_reset_search, ow_skip, ow_depower = 
+        ow.setup, ow.search, ow.select, ow.read, ow.read_bytes, ow.write, ow.crc8,
         ow.reset, ow.reset_search, ow.skip, ow.depower
 
 local node_task_post, node_task_LOW_PRIORITY = node.task.post, node.task.LOW_PRIORITY
@@ -141,7 +141,7 @@ local function _search(self, lcb, lpin, search, save)
     debugPrint (#sens, "addreses found")
   end
 
-  ow_setup(pin)
+  ow.setup(pin)
   if search or #sens == 0 then
     ow_reset_search(pin)
     -- ow_target_search(pin,0x28)

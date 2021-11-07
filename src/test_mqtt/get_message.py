@@ -6,7 +6,7 @@ def main():
     client_name = 'subscriber'
     connection_params = {'host': '192.168.1.40',
                          'port': 1883,
-                         'keepalive': 60,
+                         'keepalive': 10,
                          'bind_address': ''}
 
     client = Client(client_name)
@@ -21,19 +21,23 @@ def main():
     client.subscribe('nodemcu/ping')
     client.loop_start()
     while True:
-        time.sleep(0.01)
+        time.sleep(1)
 
     client.loop_stop()
     client.disconnect()
 
+
 def on_log(client, userdata, level, buf):
-    print("log: ",buf)
+    pass
+    # print("log: ", buf)
+
 
 def on_connect(client, userdata, flags, rc):
-    if rc==0:
+    if rc == 0:
         print("connected OK Returned code=",rc)
     else:
         print("Bad connection Returned code=",rc)
+
 
 def on_message(client, userdata, message: mqtt.client.MQTTMessage):
     print('Mesage received', str(message.payload))

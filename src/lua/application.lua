@@ -17,9 +17,9 @@ end
 local function mqtt_clb_connect(a)
   print('Connect callback')
   module.conn_status = true
-  -- client:subscribe(config.ENDPOINT .. "ping", 0)
+  client:subscribe(config.ENDPOINT .. "ping", 0)
   if module.connect_clb then
-    print('')
+    print('Connect callback')
     module.connect_clb()
   end  
 end
@@ -39,24 +39,21 @@ function module.mqtt_send(msg)
   client:publish(config.ENDPOINT .. "ping", msg, 0, 0)
 end
 
+
 local function mqtt_start()
   print('MQTT start')
-  client = mqtt.Client(config.ID, 120)
+  client = mqtt.Client("NodeMCU", 120, "user", "pass")
   
-  client:on("message", mqtt_clb_message)
+  --client:on("message", mqtt_clb_message)
   client:on("connect", mqtt_clb_connect)
   client:on("connfail", mqtt_clb_connfail)
   -- client:on("puback", mqtt_clb_puback)
   client:on("suback", mqtt_clb_suback)
-  client:connect(config.HOST, config.PORT, 0)
-  
+  client:connect(config.HOST, config.PORT, false)
 end
 
 function module.start()
   mqtt_start()
-
-  -- t = tmr.create() 
-  -- t:alarm(2000, tmr.ALARM_AUTO, mqtt_send)
 end
 
 return module
